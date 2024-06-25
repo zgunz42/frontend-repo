@@ -10,6 +10,7 @@ import {
   fetchUserFailure,
 } from "../store/userSlice";
 import { Container, Grid } from "@mui/material";
+import withAuth from "@/components/withAuth";
 
 const Main: React.FC = () => {
   const dispatch = useDispatch();
@@ -45,4 +46,4 @@ const Main: React.FC = () => {
   );
 };
 
-export default Main;
+export default withAuth(Main);

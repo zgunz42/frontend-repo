@@ -4,7 +4,7 @@ import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "../theme/theme";
-import ReduxProvider from "@/components/redux-provider";
+import ReduxProvider from "@/components/reduxProvider";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 
 const inter = Inter({ subsets: ["latin"] });
