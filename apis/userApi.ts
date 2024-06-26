@@ -15,25 +15,26 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 export const login = async (email: string, password: string) => {
   const userCredential = await signInWithEmailAndPassword(auth, email, password);
   return userCredential.user;
 };
 
-export const fetchUserData = async (uid: string) => {
-  const querySnapshot = await getDocs(collection(db, "USERS"));
-  const data: any[] = [];
-  querySnapshot.forEach((doc) => {
-    data.push(doc.data());
+export const fetchUserData = async () => {
+  const token = await auth.currentUser?.getIdToken();
+  const result = await axios.get('/api/fetch-user-data', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
-  return data;
+
+  return result.data;
 };
 
-export const updateUserData = async (uid: string, data: any) => {
+export const updateUserData = async () => {
   const token = await auth.currentUser?.getIdToken();
-  return axios.put('/api/update-user-data', data, {
+  return axios.put('/api/update-user-data', undefined, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

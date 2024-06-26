@@ -9,7 +9,7 @@ interface UserState {
 const initialState: UserState = {
   loading: false,
   error: null,
-  data: null,
+  data: [],
 };
 
 const userSlice = createSlice({

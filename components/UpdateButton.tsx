@@ -7,13 +7,15 @@ import { fetchUserStart, fetchUserSuccess, fetchUserFailure } from '../store/use
 
 const UpdateButton: React.FC = () => {
   const dispatch = useDispatch();
-  const { loading, error, data } = useSelector((state: RootState) => state.user);
+  const { loading, error } = useSelector((state: RootState) => state.user);
 
   const handleClick = async () => {
     dispatch(fetchUserStart());
     try {
-      const result = await updateUserData('user-id', { name: 'New Name' });
-      dispatch(fetchUserSuccess(result.data));
+      await updateUserData();
+      
+      const users = await fetchUserData();
+      dispatch(fetchUserSuccess(users)); 
     } catch (err) {
       dispatch(fetchUserFailure('Failed to update data'));
     }
@@ -22,11 +24,10 @@ const UpdateButton: React.FC = () => {
   return (
     <div>
       <Button variant="contained" color="primary" onClick={handleClick} disabled={loading}>
-        Update Data
+        Update Status
       </Button>
       {loading && <Typography>Loading...</Typography>}
       {error && <Typography color="error">{error}</Typography>}
-      {data && <Typography>Data: {JSON.stringify(data)}</Typography>}
     </div>
   );
 };

@@ -7,10 +7,10 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
   // eslint-disable-next-line react/display-name
   return (props: any) => {
     const router = useRouter();
-    const user = useSelector((state: RootState) => state.user);
+    const user = useSelector((state: RootState) => state.auth.user);
 
     useEffect(() => {
-      if (!user.data) {
+      if (!user) {
         router.replace('/login'); // Redirect to login page if not authenticated
       }
     }, [user, router]);

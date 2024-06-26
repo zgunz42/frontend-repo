@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../apis/userApi";
 import UpdateButton from "../components/UpdateButton";
 import {
@@ -11,9 +11,12 @@ import {
 } from "../store/userSlice";
 import { Container, Grid } from "@mui/material";
 import withAuth from "@/components/withAuth";
+import { RootState } from "@/store/reducers";
+import CardList from "@/components/CardList";
 
 const Main: React.FC = () => {
   const dispatch = useDispatch();
+  const users = useSelector((state: RootState) => state.user.data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +44,7 @@ const Main: React.FC = () => {
       >
         <h1>Main Page</h1>
         <UpdateButton />
+        <CardList users={users} />
       </Grid>
     </Container>
   );

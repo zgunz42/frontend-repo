@@ -1,30 +1,38 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "../../apis/userApi";
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormControlLabel,
-  Grid,
-  Link,
   TextField,
   Typography,
 } from "@mui/material";
+import { fetchAuthFailure, fetchAuthStart, fetchAuthSuccess } from "@/store/authSlice";
+import { useDispatch } from "react-redux";
 
 const Login: React.FC = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-  const handleLogin = async () => {
+  const handleLogin: FormEventHandler = async (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      return;
+    }
+    
     try {
-      await login(email, password);
-      router.push("/main");
+      dispatch(fetchAuthStart())
+      const user = await login(email, password);
+      dispatch(fetchAuthSuccess(user));
+      router.push("/");
     } catch (error) {
+      dispatch(fetchAuthFailure("Failed to login"));
       console.error("Failed to login", error);
     }
   };
@@ -67,10 +75,6 @@ const Login: React.FC = () => {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -79,18 +83,6 @@ const Login: React.FC = () => {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
     </Container>
