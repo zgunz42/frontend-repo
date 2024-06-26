@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend Repository
 
-## Getting Started
+This repository contains the frontend implementation using Next.js with React MUI for UI components and Redux for state management.
 
-First, run the development server:
+## Directory Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+frontend-repo/
+├── apis/
+│   └── userApi.ts
+├── theme/
+│   ├── theme.ts
+│   └── ...
+├── app/
+│   ├── _app.tsx
+│   └── ...
+├── components/
+│   └── UpdateButton.tsx
+├── store/
+│   ├── actions.ts
+│   ├── reducers.ts
+│   └── store.ts
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Install Dependencies**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+2. **Firebase Configuration**
 
-To learn more about Next.js, take a look at the following resources:
+   Set up Firebase by creating a `firebaseConfig.ts` file in the root directory with your Firebase project credentials.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Run Locally**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   To run the frontend application locally:
 
-## Deploy on Vercel
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Redux Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Redux is used for state management. The store configuration is in `store/store.ts`.
+
+## React MUI Theme
+
+The React MUI theme is defined in `theme/theme.ts`.
+
+## APIs
+
+### `userApi`
+
+- **Description:** Abstraction for backend API calls related to user operations.
+- **Location:** `apis/userApi.ts`
+
+## Components
+
+### `UpdateButton`
+
+- **Description:** Button component to trigger backend endpoint for updating data.
+- **Location:** `components/UpdateButton.tsx`
+
+## Notes
+
+To test local change `next.config.mjs` in destination variable with right one
