@@ -17,7 +17,6 @@ frontend-repo/
 ├── components/
 │   └── UpdateButton.tsx
 ├── store/
-│   ├── actions.ts
 │   ├── reducers.ts
 │   └── store.ts
 └── package.json
